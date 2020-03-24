@@ -147,6 +147,7 @@
         var recognizing = false;
         var ignore_onend;
         var start_timestamp;
+        var a = setTimeout(function () { }, 100);
         if (!('webkitSpeechRecognition' in window)) {
             upgrade();
         } else {
@@ -219,7 +220,7 @@
                 for (var i = event.resultIndex; i < event.results.length; ++i) {
                     if (event.results[i].isFinal) {
                         final_transcript += event.results[i][0].transcript;
-                        $.get(translate(select_dialect.value, "en-US",linebreak(capitalize(final_transcript)) ), function (data) {
+                        $.get(translate(select_dialect.value, "en-US", linebreak(capitalize(final_transcript))), function (data) {
                             final_span_t.innerHTML += data[0][0][0];
                         });
                     } else {
@@ -229,6 +230,7 @@
                 final_transcript = capitalize(final_transcript);
                 final_span.innerHTML = linebreak(final_transcript);
                 interim_span.innerHTML = linebreak(interim_transcript);
+                check(interim_span.innerHTML);
                 if (final_transcript || interim_transcript) {
                     showButtons('inline-block');
                 }
@@ -236,6 +238,17 @@
                 ;
         }
 
+        function check(s) {
+            clearTimeout(a);
+            interim_span_t.innerHTML = s;
+            if (s.length != 0) {
+                a = setTimeout(function () {
+                    $.get(translate(select_dialect.value, "en-US", s), function (data) {
+                        interim_span_t.innerHTML += data[0][0][0];
+                    });
+                }, 1000);
+            }
+        }
         function upgrade() {
             start_button.style.visibility = 'hidden';
             showInfo('info_upgrade');
