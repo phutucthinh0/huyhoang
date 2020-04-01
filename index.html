@@ -220,8 +220,10 @@
                 for (var i = event.resultIndex; i < event.results.length; ++i) {
                     if (event.results[i].isFinal) {
                         final_transcript += event.results[i][0].transcript;
-                        $.get(translate(select_dialect.value, "vi-VN", linebreak(capitalize(final_transcript))), function (data) {
-                            final_span_t.innerHTML += data[0][0][0];
+                        console.log(event.results[i][0].transcript);
+                        $.get(translate(select_dialect.value, "vi-VN", linebreak(capitalize(event.results[i][0].transcript))), function (data) {
+                            console.log("Trans: "+data[0][0][0]);
+                            final_span_t.innerHTML += (" "+data[0][0][0]);
                         });
                     } else {
                         interim_transcript += event.results[i][0].transcript;
