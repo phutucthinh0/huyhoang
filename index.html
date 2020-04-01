@@ -220,7 +220,7 @@
                 for (var i = event.resultIndex; i < event.results.length; ++i) {
                     if (event.results[i].isFinal) {
                         final_transcript += event.results[i][0].transcript;
-                        $.get(translate(select_dialect.value, "en-US", linebreak(capitalize(final_transcript))), function (data) {
+                        $.get(translate(select_dialect.value, "vi-VN", linebreak(capitalize(final_transcript))), function (data) {
                             final_span_t.innerHTML += data[0][0][0];
                         });
                     } else {
@@ -243,7 +243,7 @@
             interim_span_t.innerHTML = s;
             if (s.length != 0) {
                 a = setTimeout(function () {
-                    $.get(translate(select_dialect.value, "en-US", s), function (data) {
+                    $.get(translate(select_dialect.value, "vi-VN", s), function (data) {
                         interim_span_t.innerHTML += data[0][0][0];
                     });
                 }, 1000);
