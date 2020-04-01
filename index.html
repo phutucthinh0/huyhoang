@@ -223,7 +223,7 @@
                         console.log(event.results[i][0].transcript);
                         $.get(translate(select_dialect.value, "vi-VN", linebreak(capitalize(event.results[i][0].transcript))), function (data) {
                             console.log("Trans: "+data[0][0][0]);
-                            final_span_t.innerHTML += (" "+data[0][0][0]);
+                            final_span_t.innerHTML += (" "+data[0][0][0].toLowerCase());
                         });
                     } else {
                         interim_transcript += event.results[i][0].transcript;
